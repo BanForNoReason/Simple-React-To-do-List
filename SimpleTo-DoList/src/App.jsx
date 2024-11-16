@@ -24,6 +24,26 @@ export default function App() {
     setNewItem("")
   }
 
+  function toggleTodo(id, completed) {
+    setTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        if (todo.id === id) {
+          // need to do it this way so we aren't trying to mutate an immutable object, instead we are just creating a new state
+          return { ...todo, completed}
+        }
+        
+        return todo
+          
+      })
+    })
+  }
+
+  function deleteTodo(id) {
+    setTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.id !== id)
+    })
+  }
+
   return (
     //can use a fragment <> and </> to return multiple elements from a component
 
@@ -45,6 +65,7 @@ export default function App() {
   </form>
   <h1 className="header">Todo List</h1>
   <ul className="list">
+    {todos.length === 0 && "No Todos"}
     {todos.map(todo => {
     //map is returning an array of elements
     // having the key={todo.id} is essential, if you wanna modify list, delete or edit it, it specifys which one is changing
@@ -53,10 +74,13 @@ export default function App() {
       return (
       <li key={todo.id}>
         <label>
-          <input type="checkbox" checked={todo.completed} />
+          <input type="checkbox" checked={todo.completed} 
+          //able to target different todos by this onChange event listener calling to the toggleTodo function
+          onChange={e => toggleTodo(todo.id, e.target.checked)}/>
           {todo.title }  
         </label>
-      <button className="btn btn-danger">Delete</button>
+      <button onClick={() => deleteTodo(todo.id)} //the () => is calling the function deleteTodo
+      className="btn btn-danger">Delete</button>
     </li>
     )
     })}
