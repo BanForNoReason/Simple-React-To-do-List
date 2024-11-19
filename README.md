@@ -1,4 +1,18 @@
-## This is a very simple Todo list created in React
+## This is a very simple Todo list created in React + Vite
+
+This is a Todo List application built with React and Vite. The project is containerized using Docker to make setup seamless for all users.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **[Git](https://git-scm.com/):** Required to clone the repository.
+- **[Docker](https://www.docker.com/):** Required to build and run the application container.
+- Use "docker run -p 5173:5173 banfornoreason/simple-todo-list-image:v1" to run the image on your machine.
+---
+
 
 ### Purpose of the Project
 - Get familiar with hooks, functions, and JSX in the React.js framework.
